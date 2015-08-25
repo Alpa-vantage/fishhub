@@ -21,5 +21,85 @@
     "angular-ui-router": "~0.2.15",
     "angular-resource": "~1.4.4",
     "angular-translate": "~2.7.2"
+  },
+  "overrides": {
+    "angular": {
+      "main": {
+        "development": [
+          "angular.js",
+          "angular-csp.css"
+        ],
+        "production": [
+          "angular.min.js",
+          "angular-csp.css"
+        ]
+      }
+    },
+    "angular-animate": {
+      "main": {
+        "development": [
+          "angular-animate.js"
+        ],
+        "production": [
+          "angular-animate.min.js"
+        ]
+      }
+    },
+    "angular-aria": {
+      "main": {
+        "development": [
+          "angular-aria.js"
+        ],
+        "production": [
+          "angular-aria.min.js"
+        ]
+      }
+    },
+    "angular-material": {
+      "main": {
+        "development": [
+          "angular-material.js",
+          "modules/js/**/*.js",
+          "angular-material.css",
+          "modules/js/**/*.css"
+        ],
+        "production": [
+          "angular-material.min.js",
+          "modules/js/**/*.min.js",
+          "angular-material.min.css",
+          "modules/js/**/*.min.css"
+        ]
+      }
+    },
+    "angular-resource": {
+      "main": {
+        "development": [
+          "angular-resource.js"
+        ],
+        "production": [
+          "angular-resource.min.js"
+        ]
+      }
+    },
+    "angular-translate": {
+      "main": {
+        "development": [
+          "angular-translate.js"
+        ],
+        "production": [
+          "angular-translate.min.js"
+        ]
+      }
+    },
+    "angular-ui-router": {
+      "main": {
+        "development": [
+          "release/angular-ui-router.js"
+        ],
+        "production": [
+          "release/angular-ui-router.min.js"
+        ]
+      }
+    }
   }
 }

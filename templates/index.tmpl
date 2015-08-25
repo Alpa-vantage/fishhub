@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="fishHub" ng-controller="AppCtrl" ng-csp lang="<%.User.Locale%>">
+  <head>
+    <script>
+      // Detect IE 8 and below in JS using Conditional Comments
+      var ie = (function(){
+        var version = 3, div = document.createElement('div');
+        while (
+          div.innerHTML = '<!--[if gt IE ' + (++version) + ']><i></i><![endif]-->',
+          div.getElementsByTagName('i')[0]
+        );
+        return version > 4 ? version : undefined;
+      }());
+      if (ie && ie < 9) {
+        window.location = "/browser.html?v="+ie
+      }
+    </script>
+    <title ng-bind="pageTitle">FishHub</title>
+    <meta content="width=device-width" name="viewport">
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  </head>
+  <body onunload="">
+  </body>
+</html>
