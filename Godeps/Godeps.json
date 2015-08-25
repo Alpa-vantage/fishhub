@@ -1,0 +1,67 @@
+{
+	"ImportPath": "github.com/ramamoorthy/fish",
+	"GoVersion": "go1.3",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "code.google.com/p/go.net/html",
+			"Comment": "null-128",
+			"Rev": "9c33002573cb03309e20978369b0536f4f00b24d"
+		},
+		{
+			"ImportPath": "github.com/codegangsta/inject",
+			"Comment": "v1.0-rc1",
+			"Rev": "37d7f8432a3e684eef9b2edece76bdfa6ac85b39"
+		},
+		{
+			"ImportPath": "github.com/go-martini/martini",
+			"Comment": "v1.0-rc1-28-g234dc6b",
+			"Rev": "234dc6b858add8eb6ca1f143545f2d643515f70b"
+		},
+		{
+			"ImportPath": "github.com/joho/godotenv",
+			"Rev": "3c13a80fe13f26da8d7cf5b257bdfe54975b8043"
+		},
+		{
+			"ImportPath": "github.com/martini-contrib/render",
+			"Rev": "c8d058a00a82f27bfc8a49d62525b7c60efcf5b8"
+		},
+		{
+			"ImportPath": "github.com/martini-contrib/secure",
+			"Rev": "56b905eb8ab2eb124d2f4acfa3ea893df45b7d79"
+		},
+		{
+			"ImportPath": "github.com/russross/blackfriday",
+			"Comment": "v1.1-120-g03a690a",
+			"Rev": "03a690ac555062cf260afb68797b31acf5eee252"
+		},
+		{
+			"ImportPath": "github.com/tobi/airbrake-go",
+			"Rev": "82b5fcb46ff5414435ea1839bddb85a3d71b321a"
+		},
+		{
+			"ImportPath": "github.com/yvasiyarov/go-metrics",
+			"Rev": "b23f8b043b6492e7aef34eb11aab268a5c89c14b"
+		},
+		{
+			"ImportPath": "github.com/yvasiyarov/gorelic",
+			"Comment": "v0.0.6-3-g7273820",
+			"Rev": "72738204158f5f918ec897c91b3f88b8d5910613"
+		},
+		{
+			"ImportPath": "github.com/yvasiyarov/newrelic_platform_go",
+			"Rev": "2d5b3d6e6db42e361ca5a5b6376a1368f7067236"
+		},
+		{
+			"ImportPath": "gopkg.in/check.v1",
+			"Rev": "871360013c92e1c715c2de6d06b54899468a8a2d"
+		},
+		{
+			"ImportPath": "labix.org/v2/mgo",
+			"Comment": "275",
+			"Rev": "gustavo@niemeyer.net-20140501184651-975yyw9ipld92pji"
+		}
+	]
+}

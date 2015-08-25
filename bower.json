@@ -1,0 +1,25 @@
+{
+  "name": "fish",
+  "version": "0.0.0",
+  "authors": [
+    "Rama Moorthy <ram.praximo@gmail.com>"
+  ],
+  "description": "catching fish and selling it",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular-material": "~0.10.1",
+    "angular-ui-router": "~0.2.15",
+    "angular-resource": "~1.4.4",
+    "angular-translate": "~2.7.2"
+  }
+}
