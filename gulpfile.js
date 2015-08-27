@@ -39,15 +39,47 @@ gulp.task('build-vendor-dev', ['clean'], function() {
     .pipe(gulp.dest(config.build + '/bower_components'))
 });
 
+gulp.task('build-coffee', ['clean', 'build-vendor-dev'], function() {
+  return gulp.src(config.src + '/**/*.coffee')
+    .pipe(coffeeLint())
+    .pipe(coffeeLint.reporter())
+    .pipe(coffeeLint.reporter('fail'))
+    .pipe(coffee({bare: true}).on('error', gutil.log))
+    .pipe(gulp.dest(config.build + '/assets'));
+});
+
+
+gulp.task('build-templates', ['clean'], function() {
+  return gulp.src([
+      config.src + '/**/*.tpl.html',
+      '!' + config.src + '/index.tpl.html'
+    ])
+    .pipe(html2js({
+      moduleName: 'sh.templates',
+      prefix: ''
+    }))
+    .pipe(concat('templates.js'))
+    .pipe(gulp.dest(config.build));
+});
+
+
 gulp.task('build-html-dev', [
   'clean',
-  'build-vendor-dev'
+  'build-vendor-dev',
+  'build-coffee',
+  'build-templates'
 ], function() {
   var sourceStream = streamQueue(
     {objectMode: true},
-    gulp.src([config.build + "/bower_components/**/*.js",
-      config.build + "/bower_components/**/*.css"])
-      .pipe(filter(['*','!min.css'])));
+    gulp.src([
+      config.build + "/bower_components/**/*.js",
+      config.build + "/bower_components/**/*.css",
+      config.build + "/assets/**/*module.js",
+      config.build + "/assets/**/*.js",
+      config.build + "/*.js",
+      config.build + "/assets/**/*.css"
+      ])
+    );
 
   return gulp.src(config.src + '/index.tpl.html')
     .pipe(inject(sourceStream, {

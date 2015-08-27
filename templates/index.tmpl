@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="fishHub" ng-controller="AppCtrl" ng-csp lang="<%.User.Locale%>">
+<html ng-app="fishHubApp" ng-controller="AppCtrl" ng-csp lang="en">
   <head>
     <script>
       // Detect IE 8 and below in JS using Conditional Comments
@@ -18,11 +18,227 @@
     <title ng-bind="pageTitle">FishHub</title>
     <meta content="width=device-width" name="viewport">
     <!-- inject:css -->
+    <link rel="stylesheet" href="bower_components/angular/angular-csp.css">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/autocomplete/autocomplete-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/autocomplete/autocomplete-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/autocomplete/autocomplete.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/autocomplete/autocomplete.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/backdrop/backdrop-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/backdrop/backdrop-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/backdrop/backdrop.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/backdrop/backdrop.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/bottomSheet/bottomSheet-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/bottomSheet/bottomSheet-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/bottomSheet/bottomSheet.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/bottomSheet/bottomSheet.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/button/button-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/button/button-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/button/button.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/button/button.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/card/card-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/card/card-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/card/card.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/card/card.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/checkbox/checkbox-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/checkbox/checkbox-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/checkbox/checkbox.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/checkbox/checkbox.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/chips/chips-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/chips/chips-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/chips/chips.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/chips/chips.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/content/content-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/content/content-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/content/content.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/content/content.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/core/core.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/core/core.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/dialog/dialog-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/dialog/dialog-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/dialog/dialog.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/dialog/dialog.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/divider/divider-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/divider/divider-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/divider/divider.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/divider/divider.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/fabSpeedDial/fabSpeedDial.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/fabSpeedDial/fabSpeedDial.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/fabToolbar/fabToolbar.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/fabToolbar/fabToolbar.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/gridList/gridList.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/gridList/gridList.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/icon/icon-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/icon/icon-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/icon/icon.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/icon/icon.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/input/input-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/input/input-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/input/input.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/input/input.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/list/list-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/list/list-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/list/list.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/list/list.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/menu/menu-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/menu/menu-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/menu/menu.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/menu/menu.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/progressCircular/progressCircular-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/progressCircular/progressCircular-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/progressCircular/progressCircular.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/progressCircular/progressCircular.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/progressLinear/progressLinear-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/progressLinear/progressLinear-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/progressLinear/progressLinear.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/progressLinear/progressLinear.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/radioButton/radioButton-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/radioButton/radioButton-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/radioButton/radioButton.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/radioButton/radioButton.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/select/select-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/select/select-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/select/select.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/select/select.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/sidenav/sidenav-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/sidenav/sidenav-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/sidenav/sidenav.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/sidenav/sidenav.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/slider/slider-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/slider/slider-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/slider/slider.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/slider/slider.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/sticky/sticky.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/sticky/sticky.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/subheader/subheader-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/subheader/subheader-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/subheader/subheader.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/subheader/subheader.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/switch/switch-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/switch/switch-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/switch/switch.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/switch/switch.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/tabs/tabs-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/tabs/tabs-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/tabs/tabs.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/tabs/tabs.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/textField/textField-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/textField/textField-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/textField/textField.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/textField/textField.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/toast/toast-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/toast/toast-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/toast/toast.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/toast/toast.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/toolbar/toolbar-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/toolbar/toolbar-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/toolbar/toolbar.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/toolbar/toolbar.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/tooltip/tooltip-default-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/tooltip/tooltip-default-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/tooltip/tooltip.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/tooltip/tooltip.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/virtualRepeat/virtualRepeat.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/virtualRepeat/virtualRepeat.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/whiteframe/whiteframe.css">
+    <link rel="stylesheet" href="bower_components/angular-material/modules/js/whiteframe/whiteframe.min.css">
     <!-- endinject -->
     <!-- Fav and touch icons -->
     <link rel="shortcut icon" href="assets/favicon.ico">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   </head>
   <body onunload="">
+    <div ui-view="main">
+    </div>
+    <!-- inject:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-material/modules/js/autocomplete/autocomplete.js"></script>
+    <script src="bower_components/angular-material/modules/js/autocomplete/autocomplete.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/backdrop/backdrop.js"></script>
+    <script src="bower_components/angular-material/modules/js/backdrop/backdrop.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/bottomSheet/bottomSheet.js"></script>
+    <script src="bower_components/angular-material/modules/js/bottomSheet/bottomSheet.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/button/button.js"></script>
+    <script src="bower_components/angular-material/modules/js/button/button.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/card/card.js"></script>
+    <script src="bower_components/angular-material/modules/js/card/card.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/checkbox/checkbox.js"></script>
+    <script src="bower_components/angular-material/modules/js/checkbox/checkbox.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/chips/chips.js"></script>
+    <script src="bower_components/angular-material/modules/js/chips/chips.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/content/content.js"></script>
+    <script src="bower_components/angular-material/modules/js/content/content.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/core/core.js"></script>
+    <script src="bower_components/angular-material/modules/js/core/core.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/core/default-theme.js"></script>
+    <script src="bower_components/angular-material/modules/js/dialog/dialog.js"></script>
+    <script src="bower_components/angular-material/modules/js/dialog/dialog.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/divider/divider.js"></script>
+    <script src="bower_components/angular-material/modules/js/divider/divider.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/fabActions/fabActions.js"></script>
+    <script src="bower_components/angular-material/modules/js/fabActions/fabActions.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/fabSpeedDial/fabSpeedDial.js"></script>
+    <script src="bower_components/angular-material/modules/js/fabSpeedDial/fabSpeedDial.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/fabToolbar/fabToolbar.js"></script>
+    <script src="bower_components/angular-material/modules/js/fabToolbar/fabToolbar.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/fabTrigger/fabTrigger.js"></script>
+    <script src="bower_components/angular-material/modules/js/fabTrigger/fabTrigger.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/gridList/gridList.js"></script>
+    <script src="bower_components/angular-material/modules/js/gridList/gridList.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/icon/icon.js"></script>
+    <script src="bower_components/angular-material/modules/js/icon/icon.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/input/input.js"></script>
+    <script src="bower_components/angular-material/modules/js/input/input.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/list/list.js"></script>
+    <script src="bower_components/angular-material/modules/js/list/list.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/menu/menu.js"></script>
+    <script src="bower_components/angular-material/modules/js/menu/menu.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/progressCircular/progressCircular.js"></script>
+    <script src="bower_components/angular-material/modules/js/progressCircular/progressCircular.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/progressLinear/progressLinear.js"></script>
+    <script src="bower_components/angular-material/modules/js/progressLinear/progressLinear.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/radioButton/radioButton.js"></script>
+    <script src="bower_components/angular-material/modules/js/radioButton/radioButton.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/select/select.js"></script>
+    <script src="bower_components/angular-material/modules/js/select/select.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/sidenav/sidenav.js"></script>
+    <script src="bower_components/angular-material/modules/js/sidenav/sidenav.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/slider/slider.js"></script>
+    <script src="bower_components/angular-material/modules/js/slider/slider.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/sticky/sticky.js"></script>
+    <script src="bower_components/angular-material/modules/js/sticky/sticky.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/subheader/subheader.js"></script>
+    <script src="bower_components/angular-material/modules/js/subheader/subheader.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/swipe/swipe.js"></script>
+    <script src="bower_components/angular-material/modules/js/swipe/swipe.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/switch/switch.js"></script>
+    <script src="bower_components/angular-material/modules/js/switch/switch.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/tabs/tabs.js"></script>
+    <script src="bower_components/angular-material/modules/js/tabs/tabs.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/textField/textField.js"></script>
+    <script src="bower_components/angular-material/modules/js/textField/textField.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/toast/toast.js"></script>
+    <script src="bower_components/angular-material/modules/js/toast/toast.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/toolbar/toolbar.js"></script>
+    <script src="bower_components/angular-material/modules/js/toolbar/toolbar.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/tooltip/tooltip.js"></script>
+    <script src="bower_components/angular-material/modules/js/tooltip/tooltip.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/virtualRepeat/virtualRepeat.js"></script>
+    <script src="bower_components/angular-material/modules/js/virtualRepeat/virtualRepeat.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/whiteframe/whiteframe.js"></script>
+    <script src="bower_components/angular-material/modules/js/whiteframe/whiteframe.min.js"></script>
+    <script src="assets/signup/signup.module.js"></script>
+    <script src="assets/app/app.js"></script>
+    <script src="assets/app/app.spec.js"></script>
+    <script src="assets/signup/signup.controller.js"></script>
+    <script src="assets/signup/signup.service.js"></script>
+    <script src="templates.js"></script>
+    <!-- endinject -->
   </body>
 </html>

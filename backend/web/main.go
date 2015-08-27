@@ -8,7 +8,7 @@ import (
 )
 
 func home(r render.Render) {
-	r.HTML(200, "hello", "jeremy")
+	r.HTML(200, "index", "jeremy")
 }
 
 func main() {
@@ -19,7 +19,9 @@ func main() {
 	m.Handlers(
 		render.Renderer(render.Options{
 			Delims: render.Delims{"<%", "%>"},
-		}))
+		}),
+		martini.Static("public"),
+	)
 
 	m.NotFound(func(r render.Render) {
 		r.HTML(404, "404", nil)

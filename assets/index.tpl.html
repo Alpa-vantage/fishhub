@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="fishHub" ng-controller="AppCtrl" ng-csp lang="<%.User.Locale%>">
+<html ng-app="fishHubApp" ng-controller="AppCtrl" ng-csp lang="en">
   <head>
     <script>
       // Detect IE 8 and below in JS using Conditional Comments
@@ -24,5 +24,9 @@
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   </head>
   <body onunload="">
+    <div ui-view="main">
+    </div>
+    <!-- inject:js -->
+    <!-- endinject -->
   </body>
 </html>
