@@ -35,9 +35,8 @@ gulp.task('clean', function() {
 });
 
 gulp.task('build-vendor-dev', ['clean'], function() {
-  return bowerFiles({env: 'development'})
-    .pipe(filter('!**/airbrake-shim.js'))
-    .pipe(gulp.dest(config.build + '/bower_components'));
+  return bowerFiles({env: "development", bowerDirectory: "./bower_components"})
+    .pipe(gulp.dest(config.build + '/bower_components'))
 });
 
 gulp.task('build-html-dev', [
@@ -46,8 +45,9 @@ gulp.task('build-html-dev', [
 ], function() {
   var sourceStream = streamQueue(
     {objectMode: true},
-    bowerFiles({env: 'development'})
-      .pipe(filter('!**/airbrake-shim.js')));
+    gulp.src([config.build + "/bower_components/**/*.js",
+      config.build + "/bower_components/**/*.css"])
+      .pipe(filter(['*','!min.css'])));
 
   return gulp.src(config.src + '/index.tpl.html')
     .pipe(inject(sourceStream, {
