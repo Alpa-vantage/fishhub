@@ -3,5 +3,11 @@ angular.module('fh.signup').controller('SignupCtrl', (
   $scope
   $location
   ) ->
-  $scope.page = "signup"
+
+  $scope.roles = [
+    "wholesaler",
+    "retailer",
+    "collector",
+    "fisher"
+  ]
 )
