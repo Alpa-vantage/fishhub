@@ -4,25 +4,37 @@
     <md-input-container class="md-icon-float">
       <!-- Use floating label instead of placeholder -->
       <label>Name</label>
-      <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
-      <input ng-model="user.name" type="text">
+      <ng-md-icon icon="person" size="24" style="fill:red"></ng-md-icon>
+      <input ng-model="user.name" type="text" ng-required="true">
     </md-input-container>
 
     <md-input-container md-no-float="">
-      <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
+      <ng-md-icon icon="phone" size="24" style="fill:dodgerblue"></ng-md-icon>
       <input ng-model="user.phone" type="text" placeholder="Phone Number">
     </md-input-container>
 
     <md-input-container>
-      <!-- Use floating placeholder instead of label -->
-      <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
+      <ng-md-icon icon="email" size="24" style="fill:red"></ng-md-icon>
       <input ng-model="user.email" type="email" placeholder="Email (required)" ng-required="true">
     </md-input-container>
 
     <md-input-container md-no-float="">
-      <md-icon md-svg-src="img/icons/ic_place_24px.svg" style="display:inline-block;"></md-icon>
+      <ng-md-icon icon="place" size="24" style="fill:dodgerblue"></ng-md-icon>
       <input ng-model="user.address" type="text" placeholder="Address">
     </md-input-container>
+
+    <md-input-container>
+      <ng-md-icon icon="email" size="24" style="fill:red"></ng-md-icon>
+      <input ng-model="user.password" type="email" placeholder="Password" ng-required="true">
+    </md-input-container>
+
+    <md-input-container>
+      <!-- Use floating placeholder instead of label -->
+      <ng-md-icon icon="email" size="24" style="fill:red"></ng-md-icon>
+      <input ng-model="user.confirm_password" type="password" placeholder="Confirm password" ng-required="true">
+    </md-input-container>
+
+     <md-button md-no-ink="" class="md-primary">Submit</md-button>
 
   </md-content>
 
