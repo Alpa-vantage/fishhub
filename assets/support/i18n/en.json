@@ -11,6 +11,10 @@
     {
       "key": "PAGE_TITLE_MY_PROFILE",
       "value": "My Profile"
+    },
+    {
+      "key": "HEADER_MENU",
+      "value": "My Profile"
     }
   ]
 }
