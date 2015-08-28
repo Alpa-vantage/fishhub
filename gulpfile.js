@@ -34,6 +34,62 @@ gulp.task('clean', function() {
     .pipe(clean())
 });
 
+/**
+ * Converts JSON dictionaries to Angular.js and includes them in fh.i18n module.
+ */
+function json2translate(template) {
+  var templateStr = null;
+  var queue = [];
+
+  var translationTemplate = function(dictFile) {
+    var locale = path.basename(dictFile.path, '.json');
+    var inputDict = JSON.parse(dictFile.contents)[locale];
+    if (!inputDict) {
+      console.error('Unexpected translation format. locale=' + locale);
+      return null;
+    }
+
+    var dict = {};
+    inputDict.forEach(function(d) {
+      dict[d.key] = d.value;
+    });
+
+    dictFile.contents = new Buffer(templateStr
+        .replace('{{LOCALE}}', JSON.stringify(locale))
+        .replace('{{DICTIONARY}}', JSON.stringify(dict)));
+    dictFile.path = dictFile.path.replace(/\.json$/, '.js');
+    return dictFile;
+  };
+
+  var outputStream = through2.obj(function(dictFile, enc, callback) {
+    if (templateStr) {
+      outputStream.push(translationTemplate(dictFile));
+      callback();
+    }
+    else {
+      queue.push({dictFile: dictFile, callback: callback});
+    }
+  });
+
+  template.pipe(through2.obj(function(templateFile, enc, callback) {
+    if (templateStr) {
+      throw new Error("Only expected one json2translate template file.");
+    }
+
+    templateStr = templateFile.contents.toString();
+
+    while (queue.length > 0) {
+      var queued = queue.shift();
+      outputStream.push(translationTemplate(queued.dictFile));
+      queued.callback();
+    }
+
+    callback();
+  }));
+
+  return outputStream;
+}
+
 gulp.task('build-vendor-dev', ['clean'], function() {
   return bowerFiles({env: "development", bowerDirectory: "./bower_components"})
     .pipe(gulp.dest(config.build + '/bower_components'))
