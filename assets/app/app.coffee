@@ -2,8 +2,9 @@ angular.module('fishHubApp',[
   'ui.router'
   'fh.signup'
   'ngMaterial'
-  'sh.templates'
+  'fh.templates'
   'ngMdIcons'
+  'pascalprecht.translate'
 ])
 
   .controller('AppCtrl', ($scope) ->

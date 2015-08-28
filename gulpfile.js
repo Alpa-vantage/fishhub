@@ -48,6 +48,13 @@ gulp.task('build-coffee', ['clean', 'build-vendor-dev'], function() {
     .pipe(gulp.dest(config.build + '/assets'));
 });
 
+gulp.task('build-i18n', ['clean'], function() {
+  return gulp.src(config.src + '/support/i18n/**/*.json')
+    .pipe(json2translate(
+      gulp.src(config.src + '/support/i18n/i18n.tpl')
+    ))
+    .pipe(gulp.dest(config.build + '/assets/i18n'));
+});
 
 gulp.task('build-templates', ['clean'], function() {
   return gulp.src([
@@ -55,7 +62,7 @@ gulp.task('build-templates', ['clean'], function() {
       '!' + config.src + '/index.tpl.html'
     ])
     .pipe(html2js({
-      moduleName: 'sh.templates',
+      moduleName: 'fh.templates',
       prefix: ''
     }))
     .pipe(concat('templates.js'))
@@ -66,6 +73,7 @@ gulp.task('build-templates', ['clean'], function() {
 gulp.task('build-html-dev', [
   'clean',
   'build-vendor-dev',
+  'build-i18n',
   'build-coffee',
   'build-templates'
 ], function() {
