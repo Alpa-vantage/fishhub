@@ -5,6 +5,6 @@
 
 set -e
 
-export GOPATH="${PWD}/../../Godeps/_workspace:${PWD}/Godeps/_workspace:$GOPATH"
+export GOPATH="${PWD}/../Godeps/_workspace:${PWD}/Godeps/_workspace:$GOPATH"
 
 $@

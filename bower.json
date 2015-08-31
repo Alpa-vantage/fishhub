@@ -109,6 +109,16 @@
           "angular-material-icons.min.js"
         ]
       }
+    },
+    "angular-country-select": {
+      "main": {
+        "development": [
+          "dist/angular-country-select.js"
+        ],
+        "production": [
+          "angular-country-select.min.js"
+        ]
+      }
     }
   }
 }

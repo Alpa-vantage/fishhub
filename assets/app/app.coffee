@@ -1,6 +1,6 @@
 angular.module('fishHubApp',[
   'ui.router'
-  'fh.signup'
+  'fh.user'
   'ngMaterial'
   'fh.templates'
   'ngMdIcons'

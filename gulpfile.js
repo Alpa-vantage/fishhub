@@ -136,9 +136,11 @@ gulp.task('build-html-dev', [
   var sourceStream = streamQueue(
     {objectMode: true},
     gulp.src([
+      config.build + "/bower_components/angular/angular.js",
       config.build + "/bower_components/**/*.js",
       config.build + "/bower_components/**/*.css",
       config.build + "/assets/**/*module.js",
+      config.build + "/assets/**/*resource.js",
       config.build + "/assets/**/*.js",
       config.build + "/*.js",
       config.build + "/assets/**/*.css"
