@@ -21,6 +21,7 @@ var gulp = require('gulp'),
     streamQueue = require('streamqueue'),
     through = require('through'),
     through2 = require('through2'),
+    gulpNgConfig = require('gulp-ng-config')
     uglify = require('gulp-uglify');
 
 var config = {
@@ -34,9 +35,14 @@ gulp.task('clean', function() {
     .pipe(clean())
 });
 
+
+function json2angular(template) {
+
+}
 /**
  * Converts JSON dictionaries to Angular.js and includes them in fh.i18n module.
  */
+
 function json2translate(template) {
   var templateStr = null;
   var queue = [];
@@ -112,6 +118,18 @@ gulp.task('build-i18n', ['clean'], function() {
     .pipe(gulp.dest(config.build + '/assets/i18n'));
 });
 
+gulp.task('build-countries', ['clean'], function() {
+  return gulp.src(config.src + '/utility/countries.json')
+    .pipe(gulpNgConfig('fh.countries'))
+    .pipe(gulp.dest(config.build + '/utility'));
+});
+
+gulp.task('build-roles', ['clean'], function() {
+  return gulp.src(config.src + '/utility/roles.json')
+    .pipe(gulpNgConfig('fh.roles'))
+    .pipe(gulp.dest(config.build + '/utility'));
+});
+
 gulp.task('build-templates', ['clean'], function() {
   return gulp.src([
       config.src + '/**/*.tpl.html',
@@ -131,7 +149,9 @@ gulp.task('build-html-dev', [
   'build-vendor-dev',
   'build-i18n',
   'build-coffee',
-  'build-templates'
+  'build-templates',
+  'build-countries',
+  'build-roles'
 ], function() {
   var sourceStream = streamQueue(
     {objectMode: true},
@@ -142,6 +162,7 @@ gulp.task('build-html-dev', [
       config.build + "/assets/**/*module.js",
       config.build + "/assets/**/*resource.js",
       config.build + "/assets/**/*.js",
+      config.build + "/utility/**/*.js",
       config.build + "/*.js",
       config.build + "/assets/**/*.css"
       ])

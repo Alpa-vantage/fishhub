@@ -11,14 +11,14 @@
     <md-input-container>
       <label>I am </label>
       <md-select ng-model="user.role">
-          <md-option ng-repeat="role in roles" value="{{role}}">{{role}}</md-option>
+          <md-option ng-repeat="role in roles" value="{{role.code}}">{{role.name}}</md-option>
       </md-select>
     </md-input-container>
 
     <md-input-container>
       <label>Country</label>
-      <md-select ng-model="user.role">
-          <md-option ng-repeat="role in roles" value="{{role}}">{{role}}</md-option>
+      <md-select ng-model="user.country">
+          <md-option ng-repeat="country in countries" value="{{country.code}}">{{country.name}}</md-option>
       </md-select>
     </md-input-container>
 

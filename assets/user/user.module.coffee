@@ -1,6 +1,8 @@
 angular.module('fh.user', [
   'ui.router'
   'fh.userResource'
+  'fh.countries'
+  'fh.roles'
 ])
 
 .config(($stateProvider) ->

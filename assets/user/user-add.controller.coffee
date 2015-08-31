@@ -3,15 +3,14 @@ angular.module('fh.user').controller('UserAddCtrl', (
   $scope
   $location
   User
+  countries
+  roles
   ) ->
 
-  $scope.roles = [
-    "wholesaler",
-    "retailer",
-    "collector",
-    "fisher"
-  ]
   $scope.user = new User()
+  $scope.countries = countries
+  $scope.roles = roles
   $scope.createUser = ->
+    console.log($scope.countries)
     $scope.user.$save()
 )

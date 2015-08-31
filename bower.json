@@ -21,7 +21,8 @@
     "angular-ui-router": "~0.2.15",
     "angular-resource": "~1.4.4",
     "angular-translate": "~2.7.2",
-    "angular-material-icons": "*"
+    "angular-material-icons": "*",
+    "countries": "~1.0.3"
   },
   "overrides": {
     "angular": {
@@ -120,5 +121,8 @@
         ]
       }
     }
+  },
+  "devDependencies": {
+    "countries": "~1.0.3"
   }
 }
