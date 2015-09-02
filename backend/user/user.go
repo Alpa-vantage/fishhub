@@ -1,9 +1,13 @@
 package user
 
 import (
+	"github.com/alpa-vantage/fishhub/backend/db"
+	"github.com/alpa-vantage/fishhub/backend/fishhub"
 	"github.com/jamieomatthews/validation"
 	"github.com/martini-contrib/binding"
 	"github.com/martini-contrib/render"
+	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 	"net/http"
 )
 
@@ -15,28 +19,110 @@ type UserForm struct {
 	Address         string `form:"address"`
 	ContactNo       string `form:"contactno"`
 	Notification    bool   `form:"notification"`
+	ConfirmPassword string `form:"confirmpassword"`
 	Password        string `form:"password"`
-	ConfirmPassword string `form:"confirm_password"`
+}
+
+type UserProfile struct {
+	Name         string `json:"name"`
+	Email        string `json:"email"`
+	Role         string `json:"role"`
+	Country      string `json:"country"`
+	Address      string `json:"address"`
+	ContactNo    string `json:"contactno"`
+	Notification bool   `json:"notification"`
+	Password     string `json:"password"`
 }
 
 func (userForm UserForm) Validate(errors binding.Errors, req *http.Request) binding.Errors {
 	v := validation.NewValidation(&errors, userForm)
-	// //run some validators
 	v.Validate(&userForm.Name).Key("name").MaxLength(200)
 	v.Validate(&userForm.Password).Key("password").MinLength(8)
-	v.Validate(&userForm.Email).Classify("email-class").Email()
-
+	v.Validate(&userForm.Email).Classify("EmailFormatError").Email()
 	if userForm.Password != userForm.ConfirmPassword {
-		errors = append(errors, binding.Error{Message: "Password does not match"})
+		fields := []string{"password", "confirm_password"}
+		errors = append(errors, binding.Error{Message: "password does not match", FieldNames: fields, Classification: "PasswordNotMatchError"})
 	}
 	return *v.Errors.(*binding.Errors)
 }
 
-func NewUser(r render.Render, re *http.Request) {
-
+func userExist(f *fishhub.Service, email string) bool {
+	db := f.DB.Copy()
+	defer db.Close()
+	ui := UserProfile{}
+	query := bson.M{"email": email}
+	err := db.FindOne("users", query, &ui)
+	if err == mgo.ErrNotFound {
+		return false
+	} else {
+		return true
+	}
+	return false
 }
 
-func UpdateUser(r render.Render, re *http.Request) {
+func NewUser(r render.Render, re *http.Request, f *fishhub.Service, userForm UserForm) {
+	if userExist(f, userForm.Email) {
+		r.JSON(400, map[string]interface{}{
+			"Message":        "User email id is already taken",
+			"FieldNames":     "email",
+			"Classification": "UserExistError",
+		})
+		return
+	}
+
+	user := UserProfile{}
+	user.Email = userForm.Email
+	user.Name = userForm.Name
+	user.Role = userForm.Role
+	user.Password = userForm.Password
+	user.Notification = userForm.Notification
+	user.Address = userForm.Address
+	user.ContactNo = userForm.ContactNo
+	user.Country = userForm.Country
+
+	d := f.DB.Copy()
+	defer d.Close()
+
+	updated, _ := d.Upsert("users", db.Query{"email": user.Email}, nil, user, true)
+
+	if updated == true {
+		r.JSON(200, map[string]interface{}{
+			"Message": "User profile is successfully created.",
+		})
+		return
+	}
+
+	r.JSON(400, map[string]interface{}{
+		"Message":        "Unknown error occurred, please try again",
+		"Classification": "UnknownError",
+	})
+	return
+}
+
+func UpdateUser(r render.Render, re *http.Request, f *fishhub.Service, userForm UserForm) {
+	user := UserProfile{}
+	user.Email = userForm.Email
+	user.Name = userForm.Name
+	user.Role = userForm.Role
+	user.Password = userForm.Password
+	user.Notification = userForm.Notification
+	user.Address = userForm.Address
+	user.ContactNo = userForm.ContactNo
+	user.Country = userForm.Country
+	updated, _ := d.Upsert("users", db.Query{"email": user.Email}, nil, user, true)
+
+	if updated == true {
+		r.JSON(200, map[string]interface{}{
+			"Message": "User profile is successfully updated.",
+		})
+		return
+	}
+
+	r.JSON(400, map[string]interface{}{
+		"Message":        "Unknown error occurred, please try again",
+		"Classification": "UnknownError",
+	})
+	return
 
 }
 
