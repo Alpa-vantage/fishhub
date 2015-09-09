@@ -27,7 +27,23 @@
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   </head>
   <body onunload="">
-    <a ng-bind="'HEADER_MENU' | translate" href="">My Profile</a>
+      <md-toolbar class="md-accent">
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings">
+          <ng-md-icon icon="menu" size="20" style="fill:white"></ng-md-icon>
+        </md-button>
+        <h2>
+          <span>Welcome to FishHub</span>
+        </h2>
+        <span flex=""></span>
+        <md-button class="md-icon-button" aria-label="Favorite">
+          <ng-md-icon icon="person" size="24" style="fill:white"></ng-md-icon>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="More">
+          <ng-md-icon icon="email" size="24" style="fill:black"></ng-md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
     <div ui-view="main">
     </div>
     <!-- inject:js -->

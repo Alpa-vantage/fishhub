@@ -35,13 +35,17 @@ type UserProfile struct {
 }
 
 func (userForm UserForm) Validate(errors binding.Errors, req *http.Request) binding.Errors {
+	if len(errors) >= 1 {
+		return errors
+	}
 	v := validation.NewValidation(&errors, userForm)
-	v.Validate(&userForm.Name).Key("name").MaxLength(200)
-	v.Validate(&userForm.Password).Key("password").MinLength(8)
+	v.Validate(&userForm.Name).Classify("MinimumLengthError").Key("name").MinLength(4)
+	v.Validate(&userForm.Name).Classify("MaxLengthError").Key("name").MaxLength(400)
+	v.Validate(&userForm.Password).Classify("MinimumLengthError").Key("password").MinLength(8)
 	v.Validate(&userForm.Email).Classify("EmailFormatError").Email()
 	if userForm.Password != userForm.ConfirmPassword {
 		fields := []string{"password", "confirm_password"}
-		errors = append(errors, binding.Error{Message: "password does not match", FieldNames: fields, Classification: "PasswordNotMatchError"})
+		errors = append(errors, binding.Error{Message: "does not match", FieldNames: fields, Classification: "PasswordNotMatchError"})
 	}
 	return *v.Errors.(*binding.Errors)
 }
@@ -61,15 +65,16 @@ func userExist(f *fishhub.Service, email string) bool {
 }
 
 func NewUser(r render.Render, re *http.Request, f *fishhub.Service, userForm UserForm) {
+	userExistError := binding.Error{
+		Message:        "is already taken",
+		FieldNames:     []string{"email"},
+		Classification: "UserExistError",
+	}
+	errors := binding.Errors{userExistError}
 	if userExist(f, userForm.Email) {
-		r.JSON(400, map[string]interface{}{
-			"Message":        "User email id is already taken",
-			"FieldNames":     "email",
-			"Classification": "UserExistError",
-		})
+		r.JSON(400, errors)
 		return
 	}
-
 	user := UserProfile{}
 	user.Email = userForm.Email
 	user.Name = userForm.Name
@@ -87,14 +92,14 @@ func NewUser(r render.Render, re *http.Request, f *fishhub.Service, userForm Use
 
 	if updated == true {
 		r.JSON(200, map[string]interface{}{
-			"Message": "User profile is successfully created.",
+			"message": "User profile is successfully created.",
 		})
 		return
 	}
 
 	r.JSON(400, map[string]interface{}{
-		"Message":        "Unknown error occurred, please try again",
-		"Classification": "UnknownError",
+		"message":        "Unknown error occurred, please try again",
+		"classification": "UnknownError",
 	})
 	return
 }
@@ -109,6 +114,10 @@ func UpdateUser(r render.Render, re *http.Request, f *fishhub.Service, userForm 
 	user.Address = userForm.Address
 	user.ContactNo = userForm.ContactNo
 	user.Country = userForm.Country
+
+	d := f.DB.Copy()
+	defer d.Close()
+
 	updated, _ := d.Upsert("users", db.Query{"email": user.Email}, nil, user, true)
 
 	if updated == true {

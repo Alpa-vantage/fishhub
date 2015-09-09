@@ -143,7 +143,6 @@ gulp.task('build-templates', ['clean'], function() {
     .pipe(gulp.dest(config.build));
 });
 
-
 gulp.task('build-html-dev', [
   'clean',
   'build-vendor-dev',
