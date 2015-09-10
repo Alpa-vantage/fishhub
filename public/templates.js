@@ -89,8 +89,9 @@ module.run(['$templateCache', function($templateCache) {
     '      <ng-md-icon icon="security" size="24" style="fill:red"></ng-md-icon>\n' +
     '      <input ng-model="user.confirmpassword" type="password" placeholder="Confirm password" ng-required="true">\n' +
     '    </md-input-container>\n' +
+    '\n' +
     '    <md-input-container>\n' +
-    '      <md-switch ng-model="user.notification" aria-label="Receive notifications" ng-bind="\'Receive Notification\' | translate">\n' +
+    '      <md-switch ng-model="user.notification" aria-label="Receive notifications">\n' +
     '        Receive notification\n' +
     '      </md-switch>\n' +
     '    </md-input-container>\n' +
