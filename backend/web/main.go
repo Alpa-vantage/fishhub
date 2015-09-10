@@ -3,11 +3,13 @@ package main
 import (
 	"github.com/alpa-vantage/fishhub/backend/config"
 	"github.com/alpa-vantage/fishhub/backend/fishhub"
+	. "github.com/alpa-vantage/fishhub/backend/login"
 	"github.com/alpa-vantage/fishhub/backend/session"
 	. "github.com/alpa-vantage/fishhub/backend/user"
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/binding"
 	"github.com/martini-contrib/render"
+	"github.com/martini-contrib/sessions"
 	"log"
 	"net/http"
 )
@@ -33,10 +35,14 @@ func main() {
 		log.Fatal(err)
 	}
 
+	store := sessions.NewCookieStore([]byte("@!#$%^&*"))
+
 	m := martini.Classic()
 
 	m.Map(fishhubService)
 	m.Map(sessionService)
+
+	m.Use(sessions.Sessions("go_session", store))
 
 	// Setup routes
 	m.Get("/", home)
@@ -46,6 +52,10 @@ func main() {
 		r.Get("/:id", GetUser)
 		r.Put("/update/:id", UpdateUser)
 		r.Delete("/delete/:id", DeleteUser)
+	})
+
+	m.Group("/login", func(r martini.Router) {
+		r.Post("", binding.Bind(LoginForm{}), CheckCredential)
 	})
 
 	m.Handlers(

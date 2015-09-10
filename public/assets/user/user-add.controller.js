@@ -1,19 +1,32 @@
 angular.module('fh.user').controller('UserAddCtrl', function($rootScope, $scope, $location, User, countries, roles, $mdDialog) {
-  var errorController;
+  var errorCtrl, successSignupCtrl;
   $scope.user = new User();
   $scope.countries = countries;
   $scope.roles = roles;
   $scope.loading = false;
-  $scope.errors = {};
-  errorController = function($scope, $mdDialog, errors) {
+  successSignupCtrl = function($scope, $mdDialog) {
+    return $scope.hide = function() {
+      $mdDialog.hide();
+      return $location.path("login");
+    };
+  };
+  errorCtrl = function($scope, $mdDialog, errors) {
     $scope.errors = errors;
     return $scope.hide = function() {
       return $mdDialog.hide();
     };
   };
+  $scope.showSignupSuccess = function() {
+    return $mdDialog.show({
+      controller: successSignupCtrl,
+      templateUrl: 'signupSuccess.tmpl.html',
+      parent: angular.element(document.querySelector('#userContainer')),
+      clickOutsideToClose: true
+    });
+  };
   $scope.showSignupErrors = function(errors) {
     return $mdDialog.show({
-      controller: errorController,
+      controller: errorCtrl,
       templateUrl: 'signupErrors.tmpl.html',
       parent: angular.element(document.querySelector('#userContainer')),
       locals: {
@@ -23,10 +36,10 @@ angular.module('fh.user').controller('UserAddCtrl', function($rootScope, $scope,
     });
   };
   return $scope.createUser = function() {
-    console.log($scope.countries);
     $scope.loading = true;
     return $scope.user.$save((function(resp, headers) {
-      return $scope.loading = false;
+      $scope.loading = false;
+      return $scope.showSignupSuccess();
     }), function(err) {
       $scope.errors = err.data;
       $scope.showSignupErrors();

@@ -12,26 +12,37 @@ angular.module('fh.user').controller('UserAddCtrl', (
   $scope.countries = countries
   $scope.roles = roles
   $scope.loading=false
-  $scope.errors = {}
 
-  errorController = ($scope, $mdDialog, errors) ->
+  successSignupCtrl = ($scope, $mdDialog) ->
+    $scope.hide = ->
+      $mdDialog.hide()
+      $location.path("login")
+
+  errorCtrl = ($scope, $mdDialog, errors) ->
     $scope.errors = errors
     $scope.hide = ->
       $mdDialog.hide()
 
+  $scope.showSignupSuccess = ->
+    $mdDialog.show(
+      controller: successSignupCtrl
+      templateUrl: 'signupSuccess.tmpl.html'
+      parent: angular.element(document.querySelector('#userContainer'))
+      clickOutsideToClose: true)
+
   $scope.showSignupErrors = (errors) ->
     $mdDialog.show(
-      controller: errorController
+      controller: errorCtrl
       templateUrl: 'signupErrors.tmpl.html'
       parent: angular.element(document.querySelector('#userContainer'))
       locals: { errors: $scope.errors}
       clickOutsideToClose: true)
 
   $scope.createUser = ->
-    console.log($scope.countries)
     $scope.loading = true
     $scope.user.$save ((resp, headers) ->
       $scope.loading=false
+      $scope.showSignupSuccess()
     ), (err) ->
       $scope.errors = err.data
       $scope.showSignupErrors()

@@ -3,4 +3,5 @@ bin/web
 /bower_components
 node_modules
 tmp
+public
 .env
