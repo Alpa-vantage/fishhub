@@ -16,7 +16,7 @@ func Load() (*Config, error) {
 
 	mongoURL := os.Getenv("MONGOLAB_URI")
 	if mongoURL == "" {
-		return nil, fmt.Errorf("Missing MONGO_URL")
+		return nil, fmt.Errorf("MONGOLAB_URI")
 	}
 
 	port := os.Getenv("PORT")
