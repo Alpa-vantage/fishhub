@@ -52,6 +52,7 @@ func main() {
 		render.Renderer(render.Options{
 			Delims: render.Delims{"<%", "%>"},
 		}),
+		martini.Logger(),
 		martini.Static("public"),
 	)
 
