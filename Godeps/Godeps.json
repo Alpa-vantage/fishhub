@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/alpa-vantage/fishhub/backend",
+	"ImportPath": "github.com/alpa-vantage/fishhub",
 	"GoVersion": "go1.2.1",
 	"Packages": [
 		"./..."
@@ -18,6 +18,11 @@
 		{
 			"ImportPath": "github.com/jamieomatthews/validation",
 			"Rev": "fdba2d7980640b1a6a0acea43d170b054e43130b"
+		},
+		{
+			"ImportPath": "github.com/joho/godotenv",
+			"Comment": "v1-8-g443e926",
+			"Rev": "443e926da0d793d3b3f32118b1e4ba52ada26503"
 		},
 		{
 			"ImportPath": "github.com/martini-contrib/binding",
