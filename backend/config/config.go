@@ -14,7 +14,7 @@ type Config struct {
 func Load() (*Config, error) {
 	godotenv.Load(".env")
 
-	mongoURL := os.Getenv("MONGO_URL")
+	mongoURL := os.Getenv("MONGOLAB_URI")
 	if mongoURL == "" {
 		return nil, fmt.Errorf("Missing MONGO_URL")
 	}
