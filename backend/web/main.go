@@ -60,8 +60,9 @@ func main() {
 		r.HTML(404, "404", nil)
 	})
 
-	err = http.ListenAndServe(":3000", m)
+	err = http.ListenAndServe(":"+config.Port, m)
 	if err != nil {
 		log.Fatal(err)
 	}
+
 }
